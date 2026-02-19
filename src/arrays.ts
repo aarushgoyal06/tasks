@@ -38,7 +38,8 @@ export function stringsToIntegers(numbers: string[]): number[] {
  */
 // Remember, you can write functions as lambdas too! They work exactly the same.
 export const removeDollars = (amounts: string[]): number[] => {
-    return [];
+    let newDollars = amounts.map((amt: string): number => parseInt(amt.replace("$", "")) || 0);
+    return newDollars;
 };
 
 /**
@@ -47,7 +48,9 @@ export const removeDollars = (amounts: string[]): number[] => {
  * in question marks ("?").
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
-    return [];
+    let newMessages = messages.filter((msg: string): boolean => !msg.endsWith("?"));
+    newMessages = newMessages.map((msg: string): string => msg.endsWith("!") ? msg.toUpperCase() : msg);
+    return newMessages;
 };
 
 /**
@@ -55,7 +58,8 @@ export const shoutIfExclaiming = (messages: string[]): string[] => {
  * 4 letters long.
  */
 export function countShortWords(words: string[]): number {
-    return 0;
+    let shortWords = words.filter((word: string): boolean => word.length < 4);
+    return shortWords.length;
 }
 
 /**
@@ -64,7 +68,9 @@ export function countShortWords(words: string[]): number {
  * then return true.
  */
 export function allRGB(colors: string[]): boolean {
-    return false;
+    if (colors.length === 0) return true;
+    let newColors = colors.every((color: string): boolean => (color === "red" || color === "blue" || color === "green"));
+    return newColors;
 }
 
 /**
@@ -75,7 +81,10 @@ export function allRGB(colors: string[]): boolean {
  * And the array [] would become "0=0".
  */
 export function makeMath(addends: number[]): string {
-    return "";
+    if (addends.length === 0) return "0=0";
+    let sum = addends.reduce((total: number, num: number): number => total + num, 0);
+    let numbers = addends.join("+");
+    return sum + "=" + numbers;
 }
 
 /**
@@ -88,5 +97,10 @@ export function makeMath(addends: number[]): string {
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
 export function injectPositive(values: number[]): number[] {
-    return [];
+    let firstNegative = values.findIndex((num:number): boolean => num < 0);
+    let numbersToSum = firstNegative === -1 ? values : values.slice(0, firstNegative);
+    let sum = numbersToSum.reduce((total: number, num: number): number => total + num, 0);
+    let newValues = [...values];
+    newValues.splice(firstNegative === -1 ? values.length : firstNegative + 1, 0, sum);
+    return newValues;
 }
