@@ -7,12 +7,12 @@ export function StartAttempt(): React.JSX.Element {
     function addAttempt(): void {
         setAttempts((attemps) => attemps + 1);
     }
+    function flipAttemptStarted(): void {
+        setAttemptStarted(!attemptStarted);
+    }
     function reduceAttempt(): void {
         setAttempts((attemps) => attemps - 1);
         flipAttemptStarted();
-    }
-    function flipAttemptStarted(): void {
-        setAttemptStarted(!attemptStarted);
     }
     return <div>
         <Button onClick={reduceAttempt} disabled={attemptStarted || attempts === 0}>Start Quiz</Button>
